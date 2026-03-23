@@ -1,3 +1,4 @@
+package records;
 
 /* 
 1. The "Shortcut"
@@ -51,6 +52,10 @@ public class Projects {
     Alien a2 = new Alien(0, "hb");
     System.out.println(a1);
     System.out.println(a2);
+
+    // records only used for carrying data
+    // records are class cannot extend other class
+    // records can implement interface
 
   }
 }
