@@ -1,0 +1,70 @@
+The three main types of interfaces are:
+1. Normal Interface
+A standard interface that contains one or more abstract methods. 
+Purpose: Defines a contract for behavior that a class must implement.
+Example: The List or Map interfaces in the Java Collections Framework. 
+
+Example:
+    // A normal interface with multiple abstract methods
+public interface Vehicle {
+    void startEngine();
+    void stopEngine();
+    void accelerate(int speed);
+}
+
+class Car implements Vehicle {
+    public void startEngine() { System.out.println("Car started."); }
+    public void stopEngine() { System.out.println("Car stopped."); }
+    public void accelerate(int speed) { System.out.println("Accelerating to " + speed); }
+}
+
+
+2. Functional Interface (SAM)
+Introduced in Java 8, a functional interface contains exactly one abstract method. 
+Purpose: Designed to work with lambda expressions and method references for cleaner, more functional code.
+Annotation: Often marked with @FunctionalInterface to ensure it remains a single abstract method (SAM) interface.
+Common Examples: Runnable, Callable, Comparator, and built-in types like Predicate, Function, Consumer, and Supplier. 
+
+Example:
+    // The @FunctionalInterface annotation tells the compiler to enforce the single-method rule
+@FunctionalInterface
+public interface MathOperation {
+    int operate(int a, int b);
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // Using a lambda expression to implement the single abstract method on the fly
+        MathOperation addition = (a, b) -> a + b;
+        System.out.println(addition.operate(5, 3)); // Outputs: 8
+    }
+}
+
+
+3. Marker Interface (Tagging Interface)
+An interface that has no methods or fields. 
+Purpose: Used to "tag" or "mark" a class so the Java Virtual Machine (JVM) or a framework knows it has specific properties or capabilities.
+Built-in Examples: Serializable, Cloneable, and Remote. 
+
+Example:
+    // An empty marker interface
+public interface Deletable {
+}
+
+// Tagging the class with the marker interface
+class Document implements Deletable {
+    String content;
+    public Document(String content) { this.content = content; }
+}
+
+public class Database {
+    public void deleteObject(Object obj) {
+        // Checking if the object has the "tag" before deleting
+        if (obj instanceof Deletable) {
+            System.out.println("Object deleted safely.");
+        } else {
+            System.out.println("Error: This object cannot be deleted.");
+        }
+    }
+}
+
